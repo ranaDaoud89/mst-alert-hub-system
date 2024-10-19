@@ -1,0 +1,13 @@
+package com.mst.model;
+
+public enum LabelType {
+	BUG,
+	DOCUMENTATION,
+	DUPLICATE,
+	ENHANCEMENT,
+	GOOD_FISRT_ISSUE,
+	HELP_WANTED,
+	INVALID,
+	QUESTION,
+	WONTFIX	
+}
