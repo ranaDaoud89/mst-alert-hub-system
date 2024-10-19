@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: action-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: action-app
+  template:
+    metadata:
+      labels:
+        app: action-app
+    spec:
+      containers:
+      - name: action-app
+        image: ranadaud89/action-services:latest
+        ports:
+        - containerPort: 8080
