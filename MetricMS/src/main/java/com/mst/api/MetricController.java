@@ -1,6 +1,7 @@
 package com.mst.api;
 
-import java.util.UUID;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +15,14 @@ public interface MetricController {
 	
 	ResponseEntity<Metric> getMetricById(@PathVariable Integer id);
 	
+	ResponseEntity<List<Metric>> getMetricsByIds(@RequestBody List<Integer> id);
+	
 	ResponseEntity<Metric> updateMetric(@PathVariable Integer id, @RequestBody Metric metric);
 	
 	ResponseEntity<HttpStatus> deleteMetric(@PathVariable Integer id);
+	
+	ResponseEntity<List<Metric>> getAllMetrics();
+
+	ResponseEntity<Map<Integer, Boolean>> checkIfMetricsIdsExist(List<Integer> metricsIds);
 
 }

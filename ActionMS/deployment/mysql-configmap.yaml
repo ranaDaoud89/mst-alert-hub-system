@@ -3,7 +3,8 @@ kind: ConfigMap
 metadata:
   name: mysql-config
 data:
-  MYSQL_HOST: "actiondb" 
+  MYSQL_HOST: "actionDB" 
   MYSQL_PORT: "3306"
   MYSQL_USER: "root"
-  MYSQL_DATABASE: "actiondb"
+  MYSQL_DATABASE: "actionDB"
+  MYSQL_ALLOW_EMPTY_PASSWORD: "true""

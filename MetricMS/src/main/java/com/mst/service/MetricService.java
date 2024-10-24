@@ -1,7 +1,10 @@
 package com.mst.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +24,31 @@ public class MetricService {
 		return metricRepository.findById(id);
 	}
 	
+    public List<Metric> getAllMetrics() {
+        return metricRepository.findAll();
+    }
+
+    public List<Metric> getMetricsByIds(List<Integer> metricsIds) {
+        return metricRepository.findAllById(metricsIds);
+    }
+    
+    public Map<Integer, Boolean> checkIfMetricsIdsExist(List<Integer> metricsIds) {
+        List<Metric> retrievedMetrics = metricRepository.findAllById(metricsIds);
+        List<Integer> foundedMetrics = retrievedMetrics.stream().map(metric-> metric.getId()).collect(Collectors.toList());
+        
+        Map<Integer, Boolean> result = new HashMap();
+        for(Integer metricId : metricsIds) {
+        	if(foundedMetrics.contains(metricId)){
+        		result.put(metricId, true);
+        	}
+        	else {
+        		result.put(metricId, false);
+        	}
+        }
+        
+        return result;
+    }
+    
 	public Metric save(Metric action)
 	{
 		return metricRepository.save(action);

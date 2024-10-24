@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metric-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: metric-app
+  template:
+    metadata:
+      labels:
+        app: metric-app
+    spec:
+      containers:
+      - name: metric-app
+        image: ranadaud89/metric-ms-app:latest
+        ports:
+        - containerPort: 8083

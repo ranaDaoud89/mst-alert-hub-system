@@ -1,5 +1,6 @@
 package com.mst.api;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
@@ -22,5 +23,7 @@ public interface ActionController {
 	ResponseEntity<HttpStatus> markActionAsDeleted(UUID id);
 	
 	ResponseEntity<HttpStatus> disableAction(UUID id);
+
+	ResponseEntity<List<Action>> getAllActions();
 
 }

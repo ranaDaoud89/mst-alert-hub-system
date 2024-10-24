@@ -1,5 +1,7 @@
 package com.mst.controller;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +52,11 @@ public class MetricControllerImpl implements MetricController
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	@GetMapping("/get-all")
+	public ResponseEntity<List<Metric>> getAllMetrics() {
+		return new ResponseEntity<>(metricService.getAllMetrics(), HttpStatus.OK);
+	}
 
 	@Override
 	@PutMapping("/update/{id}")
@@ -71,6 +78,18 @@ public class MetricControllerImpl implements MetricController
 	public ResponseEntity<HttpStatus> deleteMetric(@PathVariable Integer id) {
 		metricService.deleteMetric(id);
 		return ResponseEntity.noContent().build();
+	}
+
+	@Override
+	@PostMapping("/get-metrics")
+	public ResponseEntity<List<Metric>> getMetricsByIds(@RequestBody List<Integer> metricsIds) {
+		return new ResponseEntity<>(metricService.getMetricsByIds(metricsIds), HttpStatus.OK);
+	}
+	
+	@Override
+	@PostMapping("/check-if-metrics-exist")
+	public ResponseEntity<Map<Integer,Boolean>> checkIfMetricsIdsExist(@RequestBody List<Integer> metricsIds) {
+		return new ResponseEntity<>(metricService.checkIfMetricsIdsExist(metricsIds), HttpStatus.OK);
 	}
 
 }

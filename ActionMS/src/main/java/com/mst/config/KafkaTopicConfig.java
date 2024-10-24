@@ -15,7 +15,10 @@ public class KafkaTopicConfig {
 	@Bean
 	NewTopic jobsQueueTopic()
 	{
-		return TopicBuilder.name(topicName).build();
+		return TopicBuilder.name(topicName)
+				.partitions(3)
+				.replicas(1)
+				.build();
 	}
 	
 	

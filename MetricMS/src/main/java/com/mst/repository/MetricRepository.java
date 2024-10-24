@@ -9,4 +9,5 @@ import com.mst.model.Metric;
 @Repository
 public interface MetricRepository extends JpaRepository<Metric, Integer> {
 	
+	
 }

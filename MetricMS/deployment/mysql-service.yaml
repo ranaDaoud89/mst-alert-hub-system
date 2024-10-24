@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: metric-db
+  labels:
+    app: metric-db
+spec:
+  selector:
+    app: metric-db
+  ports:
+    - protocol: TCP
+      port: 3307
+      targetPort: 3307
+  selector:
+    app: metric-db
+  clusterIP: None

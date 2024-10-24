@@ -8,6 +8,7 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -60,6 +61,7 @@ public class Action {
 	@Enumerated(EnumType.STRING)
 	private ActionType type;
 	
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
 	@Column(name="run_on_time")
 	private LocalTime runOnTime;
 	

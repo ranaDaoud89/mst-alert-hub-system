@@ -1,29 +1,26 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: roomdb-deployment
+  name: action-db
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: roomdb
+      app: action-db
   template:
     metadata:
       labels:
-        app: roomdb
+        app: action-db
     spec:
-      hostname: roomdb
+      hostname: action-db
       containers:
-      - name: roomdb
+      - name: action-db
         image: mysql:latest
         ports:
         - containerPort: 3307
         env:
-        - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-secret
-              key: MYSQL_ROOT_PASSWORD
+        - name: MYSQL_ALLOW_EMPTY_PASSWORD
+          value: "true"
         - name: MYSQL_DATABASE
           valueFrom:
             configMapKeyRef:

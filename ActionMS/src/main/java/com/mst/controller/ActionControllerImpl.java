@@ -1,5 +1,6 @@
 package com.mst.controller;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mst.api.ActionController;
 import com.mst.exception.ActionNotFoundException;
+import com.mst.exception.BadRequestException;
+import com.mst.exception.MetricNotFoundException;
 import com.mst.model.Action;
 import com.mst.service.ActionService;
 
@@ -34,7 +37,12 @@ public class ActionControllerImpl implements ActionController {
 		try {
 			Action newAction = actionService.save(action);
 			return new ResponseEntity<>(newAction, HttpStatus.CREATED);
-		} catch (Exception e) {
+		
+		}catch (MetricNotFoundException e) {
+			System.out.print(e.getMessage());
+			throw new BadRequestException(e.getMessage());
+		}
+		catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -50,6 +58,14 @@ public class ActionControllerImpl implements ActionController {
 		{
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+	}
+	
+	@Override
+	@GetMapping("/get-all")
+	public ResponseEntity<List<Action>> getAllActions() {
+		List<Action> actoins = actionService.getAllActions();
+
+		return new ResponseEntity<>(actoins, HttpStatus.OK);
 	}
 
 	@Override
@@ -105,8 +121,6 @@ public class ActionControllerImpl implements ActionController {
 		catch(Exception ex) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-			 
-
 	}
 
 }

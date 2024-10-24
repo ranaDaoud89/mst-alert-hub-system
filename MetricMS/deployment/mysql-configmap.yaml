@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+data:
+  MYSQL_HOST: "metricDB" 
+  MYSQL_PORT: "3307"
+  MYSQL_USER: "root"
+  MYSQL_DATABASE: "metricDB"
+  MYSQL_ALLOW_EMPTY_PASSWORD: "true""

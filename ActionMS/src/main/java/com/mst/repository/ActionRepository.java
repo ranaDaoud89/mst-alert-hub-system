@@ -1,5 +1,6 @@
 package com.mst.repository;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,8 +15,8 @@ import com.mst.model.Day;
 @Repository
 public interface ActionRepository extends JpaRepository<Action, UUID> {
 	
-    @Query("SELECT a FROM Action a WHERE a.runOnDay = :day or a.runOnDay = 'ALL'")
-    List<Action> findActionsByRunOnDay(@Param("day") Day currentDay);
+    @Query("SELECT a FROM Action a WHERE (a.runOnDay = :day or a.runOnDay = 'ALL') and a.runOnTime BETWEEN :startTime AND :endTime")
+    List<Action> findActionsByRunOnDay(@Param("day") Day currentDay, @Param("startTime") LocalTime startTime, @Param("endTime") LocalTime endTime);
     
     
 
