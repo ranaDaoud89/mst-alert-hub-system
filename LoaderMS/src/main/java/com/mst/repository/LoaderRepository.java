@@ -12,9 +12,8 @@ import com.mst.beans.EntryInfo;
 @Repository
 public interface LoaderRepository extends JpaRepository<EntryInfo, Long> {
 
-	@Query("SELECT COUNT(e) >= :threshold FROM EntryInfo e " + "WHERE e.label = :label AND e.timestamp >= timeLimit)")
-	public Boolean existsByLabelAndTimestampGreaterThanEqual(@Param("label") String label,
-			@Param("threshold") int threshold, @Param("timeLimit") LocalDateTime timeLimit);
+	@Query("SELECT e FROM EntryInfo e " + "WHERE e.label = :label AND e.timestamp >= :timeLimit")
+	public List<EntryInfo> getEntriesByLabelAndTimestamp(@Param("label") String label, @Param("timeLimit") LocalDateTime timeLimit);
 
 	@Query("SELECT e.developer_id FROM EntryInfo e " + "WHERE e.label = :label AND e.task_point <= :since "
 			+ "GROUP BY e.developer_id " + "ORDER BY COUNT(e) DESC")

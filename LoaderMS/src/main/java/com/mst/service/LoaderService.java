@@ -181,8 +181,10 @@ public class LoaderService {
 		LocalDateTime time = LocalDateTime.now();
 		for (int i = 0; i < metricsToCheck.size(); i++) {
 			metric = metricsToCheck.get(i);
-			response.put(metric.getId(), loaderRepository.existsByLabelAndTimestampGreaterThanEqual(metric.getLabel(),
-					metric.getThreshold(), time.minusHours(metric.getTimeFrameHours())));
+			System.out.println("Metric label: " +  metric.getLabel());
+			List<EntryInfo> result = loaderRepository.getEntriesByLabelAndTimestamp(metric.getLabel(), time.minusHours(metric.getTimeFrameHours()));
+			
+			response.put(metric.getId(), result.size()> metric.getThreshold());
 		} // TODO: check if label found and throw exception if not?
 		return response;
 	}
