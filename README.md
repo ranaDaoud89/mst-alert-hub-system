@@ -52,3 +52,19 @@ docker push ranadaud89/processor-ms-app:latest
 kubectl apply -f deployment/processor-service.yaml
 kubectl apply -f deployment/processor-deployment.yaml
 ```
+
+### Deploy Loader service:
+
+```
+mvn clean insall
+docker build -t loader-app-img .
+docker tag loader-app-img:latest ruqayakhalil/loader-ms-app:latest
+docker login
+docker push ruqayakhalil/loader-ms-app:latest
+
+kubectl apply -f deployment/platforminformationdb-service.yaml
+kubectl apply -f deployment/platforminformationdb-statefulset.yaml
+
+kubectl apply -f deployment/loader-service.yaml
+kubectl apply -f deployment/loader-deployment.yaml
+```
