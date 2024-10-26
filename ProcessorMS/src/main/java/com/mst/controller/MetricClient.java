@@ -12,7 +12,7 @@ import com.mst.model.Metric;
 @FeignClient(name = "metric-service", url = "${metric.service.url}")
 public interface MetricClient {
 
-	@GetMapping("/get-metrics-details")
+	@GetMapping("/get-metrics")
 	public List<Metric> getMetricsDetailsByIds(@RequestBody List<Integer> metricsIds);
 	
 	@GetMapping("/get-all")

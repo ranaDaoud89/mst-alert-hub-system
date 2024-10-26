@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: action-app
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: action-app
@@ -16,4 +16,4 @@ spec:
       - name: action-app
         image: ranadaud89/action-ms-app:latest
         ports:
-        - containerPort: 8082
+        - containerPort: 8081

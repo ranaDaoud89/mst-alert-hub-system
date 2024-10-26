@@ -4,6 +4,7 @@ package com.mst.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,16 +22,17 @@ public class ProcessorControllerImpl implements ProcessorController
 	@Autowired
 	ProcessorService processorService;
 	
-	@Autowired
-	private MetricClient metricClient;
 
 	@Override
 	@GetMapping("/get-all-metrics")
-	public ResponseEntity<String> getAllMetrics() {
-		List<Metric> foundMetrics = metricClient.getAllMetrics();
-		System.out.print("Number of Found metrics:" + foundMetrics.size());
-		return null;
+	public ResponseEntity<List<Metric>> getAllMetrics() {
+		List<Metric> foundMetrics = processorService.getAllMetrics();
+			
+		System.out.println("Number of Found metrics:" + foundMetrics.size());
+		return new ResponseEntity<List<Metric>>(foundMetrics, HttpStatus.OK);
 	}
+	
+	
 	
 	
 

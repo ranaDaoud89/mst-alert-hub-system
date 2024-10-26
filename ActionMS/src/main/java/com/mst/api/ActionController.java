@@ -25,5 +25,7 @@ public interface ActionController {
 	ResponseEntity<HttpStatus> disableAction(UUID id);
 
 	ResponseEntity<List<Action>> getAllActions();
+	
+	ResponseEntity<HttpStatus> processActionById(@PathVariable UUID id);
 
 }

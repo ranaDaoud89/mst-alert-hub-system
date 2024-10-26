@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestClientException;
 
 import com.mst.api.ActionController;
 import com.mst.exception.ActionNotFoundException;
 import com.mst.exception.BadRequestException;
 import com.mst.exception.MetricNotFoundException;
+import com.mst.exception.RestException;
 import com.mst.model.Action;
 import com.mst.service.ActionService;
 
@@ -41,6 +43,10 @@ public class ActionControllerImpl implements ActionController {
 		}catch (MetricNotFoundException e) {
 			System.out.print(e.getMessage());
 			throw new BadRequestException(e.getMessage());
+		}
+		catch(RestClientException e) {
+			System.out.print(e.getMessage());
+			throw new RestException(e.getMessage());
 		}
 		catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -109,7 +115,7 @@ public class ActionControllerImpl implements ActionController {
 	
 	@Override
 	@PutMapping("/update/{id}")
-	public ResponseEntity<Action> updateAction(UUID id, Action actionDetails) {
+	public ResponseEntity<Action> updateAction(@PathVariable UUID id, @RequestBody Action actionDetails) {
 
 		try {
 			return new ResponseEntity<Action>(actionService.updateAction(id, actionDetails),HttpStatus.OK);			
@@ -120,6 +126,20 @@ public class ActionControllerImpl implements ActionController {
 		}
 		catch(Exception ex) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@Override
+	@GetMapping("/process/{id}")
+	public ResponseEntity<HttpStatus> processActionById(@PathVariable UUID id) {
+		Optional<Action> actoin = actionService.findById(id);
+		if(!actoin.isEmpty())
+		{
+			actionService.processAction(actoin.get());
+			return new ResponseEntity<>(HttpStatus.OK);
+		}else
+		{
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 

@@ -1,7 +1,6 @@
 package com.mst.service;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.TextStyle;
@@ -138,6 +137,12 @@ public class ActionService {
 	{
 		actionRepository.deleteAll();
 	}
+	
+	
+	public void processAction(Action action)
+	{	
+		publishAction(action);
+	}
 
 	// This cron expression will run the task at minute 0 and 30 of every hour, meaning it will execute every 30 minutes.
     //@Scheduled(cron = "0 */30 * * * *")
@@ -171,9 +176,14 @@ public class ActionService {
         System.out.println(String.format("Found %d actions to push ", actionsToPush.size()));
 
         for(Action action: actionsToPush){
-            kafkaProducer.sendMessage(action);
+            publishAction(action);
         }
     }
+
+	private void publishAction(Action action) {
+		kafkaProducer.sendMessage(action);
+		System.out.println("Action witd id ["+action.getId() +"] was pushed to queue");
+	}
 	
 	 private Action getActionById(UUID id) throws ActionNotFoundException {
 		  return findById(id)

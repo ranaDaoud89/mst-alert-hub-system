@@ -1,16 +1,15 @@
 package com.mst.api;
 
-import org.springframework.http.HttpStatus;
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+
+import com.mst.model.Metric;
 
 
 
 public interface ProcessorController {
 
-	public ResponseEntity<String> getAllMetrics();
+	public ResponseEntity<List<Metric>> getAllMetrics();
 	
 }

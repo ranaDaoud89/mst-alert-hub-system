@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.mst.exception.BadRequestException;
 import com.mst.exception.ErrorResponse;
+import com.mst.exception.RestException;
 
 
 @ControllerAdvice
@@ -17,7 +18,13 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse("Bad Request", ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
-
+    
+    @ExceptionHandler(RestException.class)
+    public ResponseEntity<ErrorResponse> handleBadRequestException(RestException ex) {
+        ErrorResponse errorResponse = new ErrorResponse("Rest exception", ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.SERVICE_UNAVAILABLE);
+    }
+    
     // Optionally, handle other exceptions as well
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGenericException(Exception ex) {
