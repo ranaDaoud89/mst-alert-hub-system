@@ -160,7 +160,7 @@ public class LoaderController {
 	/* INTEGRATION FUNCTIONS */
 
 	@PostMapping("/check-metrics-condition") // change to GetMapping
-	public ResponseEntity<HashMap<Integer, Boolean>> checkIfMetricsMeetTheCondition(
+	public ResponseEntity<Map<Integer, Boolean>> checkIfMetricsMeetTheCondition(
 			@RequestBody List<Metric> metricsToCheck) {
 		return ResponseEntity.ok(loaderService.checkIfMetricsMeetTheCondition(metricsToCheck));
 	}

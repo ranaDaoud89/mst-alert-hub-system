@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: evaluation-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: evaluation-app
+  template:
+    metadata:
+      labels:
+        app: evaluation-app
+    spec:
+      containers:
+      - name: evaluation-app
+        image: ranadaud89/evaluation-ms-app:latest
+        ports:
+        - containerPort: 8084

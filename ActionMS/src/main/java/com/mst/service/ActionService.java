@@ -145,8 +145,8 @@ public class ActionService {
 	}
 
 	// This cron expression will run the task at minute 0 and 30 of every hour, meaning it will execute every 30 minutes.
-    //@Scheduled(cron = "0 */30 * * * *")
-	@Scheduled(fixedRate = 60000) // every 3 mins for testing
+    @Scheduled(cron = "0 */30 * * * *")
+	//@Scheduled(fixedRate = 60000) // every 3 mins for testing
     public void scheduleTask()
     {
 
@@ -157,7 +157,7 @@ public class ActionService {
         
         LocalTime startTime = LocalTime.of(currentHour, 0);
         LocalTime endTime = LocalTime.of(currentHour, 29);
-        if( currentDate.getMinute() > 30) {
+        if( currentDate.getMinute() >= 30) {
         	startTime = LocalTime.of(currentHour, 30);
         	endTime = LocalTime.of(currentHour, 59);
         }

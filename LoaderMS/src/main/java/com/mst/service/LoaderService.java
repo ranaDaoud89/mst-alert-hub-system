@@ -175,7 +175,7 @@ public class LoaderService {
 	/**************************************************************************************************************/
 	/* INTEGRATION FUNCTIONS */
 
-	public HashMap<Integer, Boolean> checkIfMetricsMeetTheCondition(List<Metric> metricsToCheck) {
+	public Map<Integer, Boolean> checkIfMetricsMeetTheCondition(List<Metric> metricsToCheck) {
 		HashMap<Integer, Boolean> response = new HashMap<>();
 		Metric metric = new Metric();
 		LocalDateTime time = LocalDateTime.now();
@@ -186,6 +186,7 @@ public class LoaderService {
 			
 			response.put(metric.getId(), result.size()> metric.getThreshold());
 		} // TODO: check if label found and throw exception if not?
+		System.out.println("Response from checkIfMetricsMeetTheCondition: " + response);
 		return response;
 	}
 

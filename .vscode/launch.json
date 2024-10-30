@@ -1,0 +1,49 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "ProcessorMsApplication",
+            "request": "launch",
+            "mainClass": "com.mst.ProcessorMsApplication",
+            "projectName": "ProcessorMS"
+        },
+        {
+            "type": "java",
+            "name": "EvaluationMsApplication",
+            "request": "launch",
+            "mainClass": "com.mst.EvaluationMsApplication",
+            "projectName": "com.example-EvaluationMS"
+        },
+        {
+            "type": "java",
+            "name": "LoaderMsApplication",
+            "request": "launch",
+            "mainClass": "com.mst.LoaderMsApplication",
+            "projectName": "com.example-LoaderMS"
+        },
+        {
+            "type": "java",
+            "name": "MetricMsApplication",
+            "request": "launch",
+            "mainClass": "com.mst.MetricMsApplication",
+            "projectName": "com.mst-MetricMS"
+        },
+        {
+            "type": "java",
+            "name": "ActionMsApplication",
+            "request": "launch",
+            "mainClass": "com.mst.ActionMsApplication",
+            "projectName": "com.mst.alerthub-ActionMS"
+        }
+    ]
+}

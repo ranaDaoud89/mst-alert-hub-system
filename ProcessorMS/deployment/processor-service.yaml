@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: processor-app
+  name: processor-service
+spec:
+  ports:
+  - port: 8084
+    protocol: TCP
+    targetPort: 8084
+  selector:
+    app: processor-app
+  type: NodePort
+status:
+  loadBalancer: {}
