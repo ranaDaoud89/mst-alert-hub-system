@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logger-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logger-app
+  template:
+    metadata:
+      labels:
+        app: logger-app
+    spec:
+      containers:
+      - name: logger-app
+        image: ranadaud89/logger-ms-app:latest
+        ports:
+        - containerPort: 8090
