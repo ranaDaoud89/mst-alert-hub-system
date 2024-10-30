@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sms-ns-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sms-ns-app
+  template:
+    metadata:
+      labels:
+        app: sms-ns-app
+    spec:
+      containers:
+      - name: sms-ns-app
+        image: ruqayakhalil/smsnotification-ms-app:latest
+        ports:
+        - containerPort: 7071
