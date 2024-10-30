@@ -1,40 +1,42 @@
 package com.mst.controller;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
 import com.mst.api.LoggerController;
 import com.mst.dto.LogRequestDTO;
 import com.mst.model.LogEntry;
 import com.mst.service.LoggerService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import java.time.LocalDateTime;
+
 
 @Slf4j
 @RestController
-@RequiredArgsConstructor
 public class LoggerControllerImpl implements LoggerController {
 
-    private final LoggerService loggerService;
+    @Autowired
+    private LoggerService loggerService;
 
     @Override
-    public ResponseEntity<LogEntry> createLogger(@RequestBody LogRequestDTO loggerRequest) {
+    public ResponseEntity<String> createLog(@RequestBody final LogRequestDTO loggerRequest) {
         try {
-            LogEntry logger = new LogEntry();
-            logger.setServiceName(loggerRequest.getServiceName());
-            logger.setLogLevel(loggerRequest.getLogLevel());
-            logger.setMessage(loggerRequest.getMessage());
+            log.info("Received log request for service: {}", loggerRequest.getServiceName());
 
-            log.info("Received request to create log entry: {}", logger);
-            LogEntry savedLog = loggerService.createLog(logger); // Save the log entry using the service
-            log.info("Successfully created log entry with ID: {}", savedLog.getId());
-            return new ResponseEntity<>(savedLog, HttpStatus.CREATED);
+            LogEntry logEntry = new LogEntry();
+            logEntry.setServiceName(loggerRequest.getServiceName());
+            logEntry.setLogLevel(loggerRequest.getLogLevel());
+            logEntry.setMessage(loggerRequest.getMessage());
+            logEntry.setTimestamp(LocalDateTime.now());  // Set current timestamp
+
+            LogEntry savedLog = loggerService.saveLog(logEntry);
+            log.info("Successfully saved log with ID: {}", savedLog.getId());
+
+            return ResponseEntity.ok("Log created successfully");
         } catch (Exception e) {
-            log.error("Error creating log entry: {}", e.getMessage(), e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            log.error("Error creating log: {}", e.getMessage(), e);
+            return ResponseEntity.internalServerError().body("Error creating log");
         }
     }
 }

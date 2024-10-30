@@ -7,21 +7,20 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.4</version>
+        <version>3.2.3</version>
         <relativePath/>
     </parent>
-	<groupId>com.mst.alerthub</groupId>
-	<artifactId>LoggerMS</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>LoggerMS</name>
-	<description>Demo project for Spring Boot</description>
-	<url/>
+
+    <groupId>com.mst.alerthub</groupId>
+    <artifactId>LoggerMS</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>LoggerMS</name>
+    <description>Demo project for Spring Boot</description>
 
     <properties>
-        <java.version>11</java.version>
-        <spring-cloud.version>2021.0.3</spring-cloud.version>
+        <java.version>21</java.version> <!-- Ensure this matches your project's Java version -->
+        <lombok.version>1.18.30</lombok.version> <!-- Use a property for the Lombok version -->
     </properties>
-
 
     <dependencies>
         <!-- Spring Boot Starters -->
@@ -36,39 +35,50 @@
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
 
-        <!-- Kafka -->
-		<dependency>
-			<groupId>org.springframework.kafka</groupId>
-			<artifactId>spring-kafka</artifactId>
-		</dependency>
-
-        <!-- Swagger -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-boot-starter</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-
         <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <version>1.18.30</version> <!-- Use property reference -->
+            <scope>provided</scope>
         </dependency>
 
-        <!-- slf4j -->
+        <!-- Springdoc OpenAPI (Swagger replacement for Spring Boot 3.x) -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+
+        <!-- SLF4J -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.36</version> <!-- or latest -->
+            <version>2.0.16</version>
         </dependency>
 
-        <!-- Testing -->
+        <!-- Mockito for mocking in tests -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.4.0</version> <!-- Update to the latest version if necessary -->
             <scope>test</scope>
         </dependency>
+
+        <!-- JUnit 5 for unit testing -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.10.0</version> <!-- Update to the latest version if necessary -->
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.10.0</version> <!-- Update to the latest version if necessary -->
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -83,6 +93,22 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version> <!-- Check for the latest compatible version -->
+                <configuration>
+                    <source>21</source> <!-- Set source version -->
+                    <target>21</target> <!-- Set target version -->
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.30</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
         </plugins>
