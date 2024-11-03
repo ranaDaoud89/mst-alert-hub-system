@@ -149,8 +149,11 @@ public class ActionService {
 	//@Scheduled(fixedRate = 60000) // every 3 mins for testing
     public void scheduleTask()
     {
+        triggerActionsScan();
+    }
 
-        LocalDateTime currentDate = LocalDateTime.now();
+	public void triggerActionsScan() {
+		LocalDateTime currentDate = LocalDateTime.now();
         DayOfWeek dayOfWeek = currentDate.getDayOfWeek();
         String dayName = dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH).toUpperCase();
         int currentHour = currentDate.getHour();
@@ -178,7 +181,7 @@ public class ActionService {
         for(Action action: actionsToPush){
             publishAction(action);
         }
-    }
+	}
 
 	private void publishAction(Action action) {
 		kafkaProducer.sendMessage(action);

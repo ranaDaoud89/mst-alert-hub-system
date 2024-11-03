@@ -143,4 +143,11 @@ public class ActionControllerImpl implements ActionController {
 		}
 	}
 
+	@Override
+	@GetMapping("/trigger-scan")
+	public ResponseEntity<HttpStatus> triggerManualScan() {
+		actionService.triggerActionsScan();
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
 }

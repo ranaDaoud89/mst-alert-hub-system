@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: mysql-config
+  name: actiondb-config
 data:
   MYSQL_HOST: "actionDB" 
-  MYSQL_PORT: "3306"
+  MYSQL_PORT: "3307"
   MYSQL_USER: "root"
   MYSQL_DATABASE: "actionDB"
-  MYSQL_ALLOW_EMPTY_PASSWORD: "true""
+  MYSQL_ALLOW_EMPTY_PASSWORD: "true"

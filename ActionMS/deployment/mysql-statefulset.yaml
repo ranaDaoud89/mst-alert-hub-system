@@ -24,7 +24,7 @@ spec:
         - name: MYSQL_DATABASE
           valueFrom:
             configMapKeyRef:
-              name: mysql-config
+              name: actiondb-config
               key: MYSQL_DATABASE
         volumeMounts:
         - name: mysql-persistent-storage

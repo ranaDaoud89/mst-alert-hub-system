@@ -27,5 +27,7 @@ public interface ActionController {
 	ResponseEntity<List<Action>> getAllActions();
 	
 	ResponseEntity<HttpStatus> processActionById(@PathVariable UUID id);
+	
+	ResponseEntity<HttpStatus> triggerManualScan();
 
 }
