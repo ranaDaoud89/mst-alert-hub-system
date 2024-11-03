@@ -9,8 +9,8 @@ spec:
     app: metric-db
   ports:
     - protocol: TCP
-      port: 3307
-      targetPort: 3307
+      port: 3306
+      targetPort: 3306
   selector:
     app: metric-db
   clusterIP: None
