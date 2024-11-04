@@ -8,7 +8,6 @@ kubectl apply -f ./deployment/kafka.yml
 kubectl apply -f ./deployment/zookeeper.yml
 ```
 
-
 ### Deploy Action service:
 
 ```
@@ -54,7 +53,6 @@ kubectl apply -f deployment/processor-service.yaml
 kubectl apply -f deployment/processor-deployment.yaml
 ```
 
-<<<<<<< HEAD
 ### Deploy Loader service:
 
 ```
@@ -70,7 +68,45 @@ kubectl apply -f deployment/platforminformationdb-statefulset.yaml
 kubectl apply -f deployment/loader-service.yaml
 kubectl apply -f deployment/loader-deployment.yaml
 ```
-=======
+
+### Deploy Evaluation service:
+
+```
+mvn clean insall
+docker build -t evaluation-app-img .
+docker tag evaluation-app-img:latest ruqayakhalil/evaluation-ms-app:latest
+docker login
+docker push ruqayakhalil/evaluation-ms-app:latest
+
+kubectl apply -f deployment/evaluation-service.yaml
+kubectl apply -f deployment/evaluation-deployment.yaml
+```
+
+### Deploy MailNotification service:
+
+```
+mvn clean insall
+docker build -t email-ns-app-img .
+docker tag email-ns-app-img:latest ruqayakhalil/email-ns-ms-app:latest
+docker login
+docker push ruqayakhalil/email-ns-ms-app:latest
+
+kubectl apply -f deployment/email-service.yaml
+kubectl apply -f deployment/email-deployment.yaml
+```
+
+### Deploy SMSNotification service:
+
+```
+mvn clean insall
+docker build -t sms-ns-app-img .
+docker tag sms-ns-app-img:latest ruqayakhalil/sms-ns-ms-app:latest
+docker login
+docker push ruqayakhalil/sms-ns-ms-app:latest
+
+kubectl apply -f deployment/sms-service.yaml
+kubectl apply -f deployment/sms-deployment.yaml
+```
 
 ### Deploy Logger service:
 
