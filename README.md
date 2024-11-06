@@ -62,8 +62,8 @@ docker tag loader-app-img:latest ruqayakhalil/loader-ms-app:latest
 docker login
 docker push ruqayakhalil/loader-ms-app:latest
 
-kubectl apply -f deployment/platforminformationdb-service.yaml
-kubectl apply -f deployment/platforminformationdb-statefulset.yaml
+kubectl apply -f deployment/loaderdb-service.yaml
+kubectl apply -f deployment/loaderdb-statefulset.yaml
 
 kubectl apply -f deployment/loader-service.yaml
 kubectl apply -f deployment/loader-deployment.yaml
