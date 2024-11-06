@@ -98,7 +98,7 @@ kubectl apply -f deployment/email-deployment.yaml
 ### Deploy SMSNotification service:
 
 ```
-mvn clean insall
+mvn clean install
 docker build -t sms-ns-app-img .
 docker tag sms-ns-app-img:latest ruqayakhalil/sms-ns-ms-app:latest
 docker login
@@ -111,7 +111,7 @@ kubectl apply -f deployment/sms-deployment.yaml
 ### Deploy Logger service:
 
 ```
-mvn clean insall
+mvn clean install
 docker build --platform=linux/arm64 -t logger-app-img .
 docker tag logger-app-img:latest ranadaud89/logger-ms-app:latest
 docker login
