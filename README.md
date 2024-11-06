@@ -56,7 +56,7 @@ kubectl apply -f deployment/processor-deployment.yaml
 ### Deploy Loader service:
 
 ```
-mvn clean insall
+mvn clean install
 docker build -t loader-app-img .
 docker tag loader-app-img:latest ruqayakhalil/loader-ms-app:latest
 docker login
@@ -72,7 +72,7 @@ kubectl apply -f deployment/loader-deployment.yaml
 ### Deploy Evaluation service:
 
 ```
-mvn clean insall
+mvn clean install
 docker build -t evaluation-app-img .
 docker tag evaluation-app-img:latest ruqayakhalil/evaluation-ms-app:latest
 docker login
@@ -85,7 +85,7 @@ kubectl apply -f deployment/evaluation-deployment.yaml
 ### Deploy MailNotification service:
 
 ```
-mvn clean insall
+mvn clean install
 docker build -t email-ns-app-img .
 docker tag email-ns-app-img:latest ruqayakhalil/email-ns-ms-app:latest
 docker login
